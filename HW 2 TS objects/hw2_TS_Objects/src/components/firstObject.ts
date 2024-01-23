@@ -1,0 +1,1 @@
+export const firstObject: string = 'smth'
