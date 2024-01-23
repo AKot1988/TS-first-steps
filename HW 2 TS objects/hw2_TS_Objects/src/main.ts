@@ -1,34 +1,85 @@
-import './style.css';
-import typescriptLogo from './typescript.svg';
-import viteLogo from '/vite.svg';
-import { setupCounter } from './counter.ts';
-import { firstObject } from './components/firstObject.ts';
-import SecondObject from './components/SecondObject.ts';
+// -------------------------------------------- A liitle bit practice about interfaces object in TS---------------------------------------
 
-const instanceSecondObject: SecondObject = new SecondObject('Hello', 'World!');
+//create Types for object
+type Cats = {
+  type: string;
+  averageWeight: number;
+  averageAge: number;
+  hairLength: string;
+};
 
-const string3: string = instanceSecondObject.concatenateStrings();
+type ExtendedCats = Cats & {
+  averageEyeColor: string;
+  averageTailLength?: number;
+};
 
-console.log(string3);
+const bysia: Cats = {
+  type: 'bysia',
+  averageWeight: 4,
+  averageAge: 15,
+  hairLength: 'middle',
+};
 
-console.log(firstObject);
+const barsik: ExtendedCats = {
+  type: 'barsik',
+  averageWeight: 4,
+  averageAge: 15,
+  hairLength: 'middle',
+  averageEyeColor: 'green',
+};
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`;
+console.log(bysia);
+console.log(barsik);
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
+//Create interfaces for object
+interface Dogs {
+  type: string;
+  averageWeight: number;
+  averageAge: number;
+  hairLength: string;
+}
+
+interface ExtendedDogs extends Dogs {
+  averageEyeColor: string;
+  averageTailLength?: number;
+}
+
+class BigDogs implements Dogs {
+  type: string;
+  averageWeight: number;
+  averageAge: number;
+  hairLength: string;
+
+  constructor(
+    type: string,
+    averageWeight: number,
+    averageAge: number,
+    hairLength: string
+  ) {
+    this.type = type;
+    this.averageWeight = averageWeight;
+    this.averageAge = averageAge;
+    this.hairLength = hairLength;
+  }
+}
+
+const Fill: Dogs = {
+  type: 'Fill',
+  averageWeight: 4,
+  averageAge: 15,
+  hairLength: 'middle',
+};
+
+const Rex: ExtendedDogs = {
+  type: 'Rex',
+  averageWeight: 4,
+  averageAge: 15,
+  hairLength: 'middle',
+  averageEyeColor: 'green',
+};
+
+const Tyzik: BigDogs = new BigDogs('Tyzik', 4, 15, 'middle');
+console.log(Tyzik);
+
+console.log(Fill);
+console.log(Rex);
