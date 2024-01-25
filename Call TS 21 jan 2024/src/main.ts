@@ -55,11 +55,13 @@ function showConsole(user: User[], valueToShow: string): void {
         user.pets.includes('dog')
       );
       console.log(usersWithDog);
+      break;
     case 'cat':
       let usersWithCat: User[] = user.filter((user) =>
         user.pets.includes('cat')
       );
-      console.log('usersWithCat');
+      console.log(usersWithCat);
+      break;
     case 'older18':
       let usersOlder18: User[] = user.filter((user) => {
         let userAgeInSeconds: number = new Date(user.birthDate).getTime();
@@ -67,11 +69,12 @@ function showConsole(user: User[], valueToShow: string): void {
         let userAgeInYears: number =
           (currentTimeInSeconds - userAgeInSeconds) / 31536000000;
         if (userAgeInYears > 18 && user.pets.length === 0) {
-          // console.log(user);
+          console.log(user);
           return user;
         }
       });
       console.log(usersOlder18);
+      break;
   }
 }
 
@@ -99,7 +102,7 @@ const userList: User[] = [
   {
     fullName: 'Anton',
     birthDate: '05.26.1988',
-    pets: ['cat'],
+    pets: [],
   },
 ];
 

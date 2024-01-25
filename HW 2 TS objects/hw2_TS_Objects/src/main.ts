@@ -1,4 +1,5 @@
 // -------------------------------------------- A liitle bit practice about interfaces object in TS---------------------------------------
+import BigDogs from './components/firstObject';
 
 //create Types for object
 type Cats = {
@@ -32,7 +33,7 @@ console.log(bysia);
 console.log(barsik);
 
 //Create interfaces for object
-interface Dogs {
+export interface Dogs {
   type: string;
   averageWeight: number;
   averageAge: number;
@@ -44,24 +45,24 @@ interface ExtendedDogs extends Dogs {
   averageTailLength?: number;
 }
 
-class BigDogs implements Dogs {
-  type: string;
-  averageWeight: number;
-  averageAge: number;
-  hairLength: string;
+// class BigDogs implements Dogs {
+//   type: string;
+//   averageWeight: number;
+//   averageAge: number;
+//   hairLength: string;
 
-  constructor(
-    type: string,
-    averageWeight: number,
-    averageAge: number,
-    hairLength: string
-  ) {
-    this.type = type;
-    this.averageWeight = averageWeight;
-    this.averageAge = averageAge;
-    this.hairLength = hairLength;
-  }
-}
+//   constructor(
+//     type: string,
+//     averageWeight: number,
+//     averageAge: number,
+//     hairLength: string
+//   ) {
+//     this.type = type;
+//     this.averageWeight = averageWeight;
+//     this.averageAge = averageAge;
+//     this.hairLength = hairLength;
+//   }
+// }
 
 const Fill: Dogs = {
   type: 'Fill',
