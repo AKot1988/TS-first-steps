@@ -1,0 +1,41 @@
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  background-image: linear-gradient(
+    to right,
+    #fbc2eb 0%,
+    #a6c1ee 51%,
+    #fbc2eb 100%
+  );
+  gap: 20px;
+}
+
+.good {
+  height: 250px;
+  width: 150px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: pink;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: start;
+
+  &__name,
+  &__price,
+  &__size,
+  &__count {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+// elements.name.className = 'good__name';
+// elements.price.className = 'good__price';
+// elements.size.className = 'good__size';
+// elements.count.className = 'good__count';

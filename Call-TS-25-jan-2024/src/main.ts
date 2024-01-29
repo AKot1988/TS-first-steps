@@ -17,29 +17,11 @@ S
 M
 L
 XL
-Також описати типи для змінних які вказані нижче.
+Також описати типи для змінних, вказати їх у types.js
 */
 
-// enum Size {
-//   S = 'S',
-//   M = 'M',
-//   L = 'L',
-//   XL = 'XL',
-// }
-
-// interface Clothes {
-//   _id: number;
-//   name: string;
-//   price: number | null;
-//   size: Size;
-//   count: number;
-// }
-
-// type PriceMark = {
-//   _id: number;
-//   price: number;
-// }
 import { Size, Clothes, PriceMark } from './types';
+import { CardComponent } from './CardComponent';
 
 const newClothes: Clothes[] = [
   {
@@ -137,11 +119,11 @@ const newClothes: Clothes[] = [
 const priceMark: PriceMark[] = [
   {
     _id: 883355,
-    price: 100,
+    price: 70,
   },
   {
     _id: 883356,
-    price: 100,
+    price: 90,
   },
   {
     _id: 883357,
@@ -149,31 +131,31 @@ const priceMark: PriceMark[] = [
   },
   {
     _id: 883358,
-    price: 100,
+    price: 65,
   },
   {
     _id: 883366,
-    price: 120,
+    price: 135,
   },
   {
     _id: 883366,
-    price: 100,
+    price: 95,
   },
   {
     _id: 883367,
-    price: 100,
+    price: 115,
   },
   {
     _id: 883368,
-    price: 150,
+    price: 178,
   },
   {
     _id: 883310,
-    price: 100,
+    price: 205,
   },
   {
     _id: 883311,
-    price: 100,
+    price: 105,
   },
   {
     _id: 883312,
@@ -185,6 +167,48 @@ const priceMark: PriceMark[] = [
   },
 ];
 
-function stickPrice(clothes: Clothes[], marks: PriceMark[]): Closethes[] {
-  let price: number = marks.forEach(singlePrice => {marks.price});
+let fillPrices = function(goodsArray: Clothes[], priceValues: PriceMark[]): Clothes[]{
+  let goodsWithPrice: Clothes[] = [];
+  priceValues.forEach((value) => {
+    let item = goodsArray.find((good) => {
+      if(good._id === value._id) {
+        good.price = value.price;
+        return good
+      }
+    })
+    // debugger
+      if(item !== undefined) {
+        goodsWithPrice.push(item)
+      } else {
+        console.log("store doesn't have item with " + value._id + 'ID`s')
+      }
+  })
+  return goodsWithPrice;
 }
+
+const pricedClothes: Clothes[] = fillPrices(newClothes, priceMark);
+
+console.log(newClothes);
+console.log(pricedClothes)
+
+CardComponent(pricedClothes, document.getElementById('app'))
+
+
+// enum OrderStatus {
+//   Created,
+//   Paid,
+//   Shipped,
+//   Delivered,
+// }
+// const statuses = Object.keys(OrderStatus);
+// console.log(statuses); // ['0', '1', '2', '3', 'Created', 'Paid', 'Shipped', 'Delivered']
+
+
+enum OrderStatus {
+  Created = '0',
+  Paid = '1',
+  Shipped = '2',
+  Delivered = '3',
+}
+const statuses = Object.keys(OrderStatus);
+console.log(statuses); // ['Created', 'Paid', 'Shipped', 'Delivered']

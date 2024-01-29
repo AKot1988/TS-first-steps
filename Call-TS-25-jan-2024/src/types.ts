@@ -13,9 +13,10 @@ export interface Clothes {
   count: number;
 }
 
+
+export type Size = keyof typeof SIZE
+
 export type PriceMark = {
   _id: number;
   price: number;
 };
-
-export type Size = keyof typeof SIZE
