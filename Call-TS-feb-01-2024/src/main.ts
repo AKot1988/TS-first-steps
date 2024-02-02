@@ -1,8 +1,3 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
-
 /*
 Написати функціонал імітації складу магазину продуктів.
 
@@ -102,10 +97,6 @@ const checkComposition = function(products: Product[]): void {
 
 //1)
 //створюємо обєкт та насипаємо його властивостями з динамічними ключами від TS
-
-let OrderedlistByCategory: {
-  [key: string]: Product[]
-} = {}
 type OrderedlistByCategory = {
   [key: string]: Product[]
 }
