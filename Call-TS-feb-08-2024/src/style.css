@@ -25,7 +25,9 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -37,7 +39,7 @@ h1 {
 
 #app {
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 0;
   padding: 2rem;
   text-align: center;
 }
@@ -95,30 +97,42 @@ button:focus-visible {
   }
 }
 
-body {
-display: flex;
-flex-direction: column;
-align-items: start;
+
+.error-message {
+  padding: 0;
+  margin: 0;
+
+  /* position: absolute; */
+  color: red;
+  font-weight: 200;
+  font-size: 15px;
 }
-.circle {
+
+#form__container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  transition-property: width, height;
-  /* transition-duration: 2s; */
-  position: fixed;
-  transform: translateX(-50%) translateY(-50%);
-  background-color: red;
-  border-radius: 50%;
-
-  width: 0px;
-  height: 0px;
-  top: 150px;
-  left: 150px;
+  justify-content: center;
+  padding: 2rem;
 }
 
-.string {
-  color: fff;
-  font-weight: bold;
-  font-size: large;
+.form {
+  border: 3px double teal;
+  color: teal;
+  height: 500px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
+
+.input__name,
+.input__surname,
+.input__email {
+  color: teal;
+  padding: 0;
+  padding-left: 5px;
+  margin: 0;
+}
+
