@@ -8,31 +8,9 @@
   </head>
   <body>
     <div id="app">
-      <form id="form-recipes">
-        <input name="title" type="text" class="form-recipe-title" placeholder="Введіть назву рецепту" />
-        <input name="ingredients" type="text" class="form-recipe-ingredients" placeholder="Введіть інгрідіенти через кому"/>
-        <textarea name="instructions" class="form-recipe-instructions" placeholder="Опишіть методику приготування"></textarea>
-        <select name="dificult" name="recipe-dificulty" class="form-recipe-dificulty">
-          <option disabled selected>Оцініть складність рецепту</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        <select name="category" class="form-recipe-category">
-          <option disabled selected>Оберіть тип рецепту</option>
-          <option value="1">Мнясо</option>
-          <option value="2">Риба</option>
-          <option value="3">Птиця</option>
-          <option value="4">Перші страви</option>
-          <option value="5">Другі страви</option>
-          <option value="6">Напої</option>
-        </select>
-        <button type="submit" class="submit-button">Створити рецепт</button>
+      <button class="addNewRecipe">Додати рецепт</button>
+      <div class="bookRecipesContainer"></div>
     </div>
-
-    
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

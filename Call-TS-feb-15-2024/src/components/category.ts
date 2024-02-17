@@ -31,6 +31,7 @@ class BookRecipeps{
         
         
     }
+
     editCategory(editValue:string, newValue:string):void{
         if(this.category[editValue]){
             this.category[editValue] = newValue
