@@ -4,7 +4,7 @@ export let recipeArray: Recipe[] = [
     title: 'title',
     ingredients: ['ing1', 'ing2'],
     instructions: 'instructions',
-    category: 'category',
+    category: 'Салати',
     time: 'time',
     dificult: 'dificult',
     _id: 0
@@ -13,7 +13,7 @@ export let recipeArray: Recipe[] = [
     title: 'title',
     ingredients: ['ing1', 'ing2'],
     instructions: 'instructions',
-    category: 'category',
+    category: 'Супи',
     time: 'time',
     dificult: 'dificult',
     _id: 1
@@ -22,7 +22,7 @@ export let recipeArray: Recipe[] = [
     title: 'title',
     ingredients: ['ing1', 'ing2'],
     instructions: 'instructions',
-    category: 'category',
+    category: 'Гарніри',
     time: 'time',
     dificult: 'dificult',
     _id: 2
@@ -31,7 +31,7 @@ export let recipeArray: Recipe[] = [
     title: 'title',
     ingredients: ['ing1', 'ing2'],
     instructions: 'instructions',
-    category: 'category',
+    category: 'Десерти',
     time: 'time',
     dificult: 'dificult',
     _id: 3

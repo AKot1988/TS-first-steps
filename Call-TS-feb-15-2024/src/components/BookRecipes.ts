@@ -1,4 +1,4 @@
-import { Recipe, ICategory } from './types.ts'
+import { Recipe, ICategory, FormType } from './types.ts'
 import Form from './Form.ts'
 import Modal from './Modal.ts'
 
@@ -13,8 +13,8 @@ export default class BookRecipeps{
       const recipeDiv = document.createElement('div')
       const deleteButton = document.createElement('button')
       deleteButton.textContent = 'Delete receipe'
-      const addButton = document.createElement('button')
-      addButton.textContent = 'New receipe'
+      const editButton = document.createElement('button')
+      editButton.textContent = 'Edit receipe'
       recipeDiv.classList.add('recipe-item')
       recipeDiv.innerHTML = `
         <h2 class='recipe-item-title'>${recipe.title}</h2>
@@ -28,12 +28,13 @@ export default class BookRecipeps{
         this.deleteRecipe(recipe._id)
         recipeDiv.remove()
       })
-      addButton.addEventListener('click', () => {
-        const newForm = new Form()
+      editButton.addEventListener('click', () => {
+        const newForm = new Form(undefined, 'edit', recipe)
+        console.log(recipe)
         const modal = new Modal(document.getElementById('app') as HTMLElement, newForm as any)
         modal.render()
       })
-      recipeDiv.append(deleteButton, addButton)
+      recipeDiv.append(deleteButton, editButton)
       parent.appendChild(recipeDiv)
     })
   }

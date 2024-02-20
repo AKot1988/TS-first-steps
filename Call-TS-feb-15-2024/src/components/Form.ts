@@ -1,10 +1,11 @@
-import { Recipe } from '../main';
 import { createSelect } from './utils'
+import { Recipe, FormType } from './types'
 
 const selectOptions = {
   name: 'category',
   class: 'form-recipe-category',
-  defaultValue: 'Оберіть категорію'
+  defaultValue: 'Оберіть категорію',
+  type: 'create'
 }
 
 let selectCategoryList = [
@@ -35,7 +36,8 @@ export default class Form {
   deleteCategoryButton: HTMLButtonElement;
   editCategoryButton: HTMLButtonElement;
 
-  constructor(public parent?: HTMLElement) {
+  constructor(public parent?: HTMLElement, public type: FormType = 'create', public recipeData?: Recipe) {
+    selectOptions.type = this.type
     this.form = document.createElement('form') as HTMLFormElement
     this.elements = {
       nameInput: document.createElement('input') as HTMLInputElement,
@@ -68,7 +70,6 @@ export default class Form {
     this.elements.ingredientsInput.setAttribute('name', 'ingredients')
     this.elements.ingredientsInput.setAttribute('placeholder', 'Інгредієнти')
 
-
     this.elements.instructionsInput.classList.add('form-recipe-instructions')
     this.elements.instructionsInput.setAttribute('type', 'text')
     this.elements.instructionsInput.setAttribute('name', 'instructions')
@@ -79,6 +80,7 @@ export default class Form {
     this.elements.dificultiNPUT.setAttribute('type', 'text')
     this.elements.dificultiNPUT.setAttribute('name', 'dificult')
     this.elements.dificultiNPUT.setAttribute('placeholder', 'Складність приготування')
+    
 
 
     this.elements.timeInput.classList.add('form-recipe-estimatedTime')
@@ -88,8 +90,6 @@ export default class Form {
 
     this.button.classList.add('submit-button')
     this.button.textContent = 'Додати рецепт'
-    // let that = this
-    // this.button.addEventListener('click', that.submitHandler)
     this.button.onclick = this.submitHandler
 
     this.categoryActionContainer.classList.add('category-action-container')
@@ -101,6 +101,19 @@ export default class Form {
     this.editCategoryButton.textContent = 'Редагувати категорію'
 
     this.categoryActionContainer.append(this.addCategoryButton, this.deleteCategoryButton, this.editCategoryButton)
+    if (this.type === 'edit') {
+      this.categoryActionContainer.remove()
+      this.elements.nameInput.value = this.recipeData?.title || ''
+      this.elements.ingredientsInput.value = this.recipeData?.ingredients.join(', ') || ''
+      this.elements.instructionsInput.value = this.recipeData?.instructions || ''
+      this.elements.dificultiNPUT.value = this.recipeData?.dificult || ''
+      this.elements.timeInput.value = this.recipeData?.time || ''
+      console.log(this.recipeData)
+      this.elements.categorySelect = createSelect(selectCategoryList, selectOptions, this.recipeData)
+
+      this.button.textContent = 'Редагувати рецепт'
+    }
+    
 
     this.form.append(this.elements.nameInput,
       this.elements.ingredientsInput,
@@ -112,8 +125,13 @@ export default class Form {
       this.categoryActionContainer
     )
 
+    if (this.type === 'edit') {
+      this.categoryActionContainer.remove()
+    }
+
     this.parent?.appendChild(this.form)
   }
+
 
   getFormData(): FormData {
     return new FormData(this.form)
@@ -136,4 +154,35 @@ export default class Form {
     this.form.replaceChildren()
     document.querySelector('.modal__wrapper')?.remove()
   }
+
+  // createOptions({optionsSet = [], type= 'create', value = ''}) {
+  //   switch (this.type) {
+  //     case 'edit':
+  //       return optionsSet.reduce((accumulator, currentValue) => {
+  //         if (currentValue === value) {
+  //           return (
+  //             accumulator +
+  //             `<option value="${currentValue}" data-filter="${currentValue}" selected='true'>${currentValue}</option>`
+  //           );
+  //         } else {
+  //           return (
+  //             accumulator +
+  //             `<option value="${currentValue}" data-filter="${currentValue}">${currentValue}</option>`
+  //           );
+  //         }
+  //       }, '');
+  
+  //     case 'create':
+  //       let initialValue: string = '<option disabled="" selected="">Оберіть категорію</option>'
+  //       return optionsSet.reduce((accumulator, currentValue) => {
+  //         return (
+  //           accumulator +
+  //           `<option value="${currentValue}" data-filter="${currentValue}">${currentValue}</option>`
+  //         );
+  //       }, initialValue);
+  
+  //     default:
+  //       return '';
+  //   }
+  // }
 }

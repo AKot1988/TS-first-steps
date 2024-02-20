@@ -11,3 +11,11 @@ export interface Recipe {
 export interface ICategory {
   [key: string]: Recipe[]
 }
+
+export enum FormTypeOptions {
+  create = 'create',
+  edit = 'edit'
+
+}
+
+export type FormType =  keyof typeof FormTypeOptions
