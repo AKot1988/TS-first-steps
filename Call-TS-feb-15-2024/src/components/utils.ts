@@ -14,7 +14,6 @@ export function createSelect(data: string[], options: {[key: string]: string}, r
       } else {
         generatedInnerHTML += `<option value="${element}">${element}</option>`
       }
-      console.log(generatedInnerHTML)
       return generatedInnerHTML
     })
   } else if(options.type === 'create') {

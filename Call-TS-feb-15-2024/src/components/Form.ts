@@ -1,5 +1,6 @@
 import { createSelect } from './utils'
 import { Recipe, FormType } from './types'
+import { recipeArray } from './API.ts'
 
 const selectOptions = {
   name: 'category',
@@ -108,13 +109,10 @@ export default class Form {
       this.elements.instructionsInput.value = this.recipeData?.instructions || ''
       this.elements.dificultiNPUT.value = this.recipeData?.dificult || ''
       this.elements.timeInput.value = this.recipeData?.time || ''
-      console.log(this.recipeData)
       this.elements.categorySelect = createSelect(selectCategoryList, selectOptions, this.recipeData)
 
       this.button.textContent = 'Редагувати рецепт'
     }
-    
-
     this.form.append(this.elements.nameInput,
       this.elements.ingredientsInput,
       this.elements.instructionsInput,
@@ -124,21 +122,17 @@ export default class Form {
       this.button,
       this.categoryActionContainer
     )
-
     if (this.type === 'edit') {
       this.categoryActionContainer.remove()
     }
-
     this.parent?.appendChild(this.form)
   }
-
 
   getFormData(): FormData {
     return new FormData(this.form)
   }
 
   submitHandler(event: Event) {
-    console.log(this)
     event.preventDefault()
     const formData = new FormData(this.form)
     const ingridientsArray: string[] = formData.get('ingredients')?.split(', ')
@@ -150,39 +144,10 @@ export default class Form {
       time: formData.get('time') as string,
       dificult: formData.get('dificult') as string
     }
-    console.log(data)
+    recipeArray.push(data)
+    console.log('a proof, that its works')
+    console.log(recipeArray)
     this.form.replaceChildren()
     document.querySelector('.modal__wrapper')?.remove()
   }
-
-  // createOptions({optionsSet = [], type= 'create', value = ''}) {
-  //   switch (this.type) {
-  //     case 'edit':
-  //       return optionsSet.reduce((accumulator, currentValue) => {
-  //         if (currentValue === value) {
-  //           return (
-  //             accumulator +
-  //             `<option value="${currentValue}" data-filter="${currentValue}" selected='true'>${currentValue}</option>`
-  //           );
-  //         } else {
-  //           return (
-  //             accumulator +
-  //             `<option value="${currentValue}" data-filter="${currentValue}">${currentValue}</option>`
-  //           );
-  //         }
-  //       }, '');
-  
-  //     case 'create':
-  //       let initialValue: string = '<option disabled="" selected="">Оберіть категорію</option>'
-  //       return optionsSet.reduce((accumulator, currentValue) => {
-  //         return (
-  //           accumulator +
-  //           `<option value="${currentValue}" data-filter="${currentValue}">${currentValue}</option>`
-  //         );
-  //       }, initialValue);
-  
-  //     default:
-  //       return '';
-  //   }
-  // }
 }

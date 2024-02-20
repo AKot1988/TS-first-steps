@@ -30,7 +30,6 @@ export default class BookRecipeps{
       })
       editButton.addEventListener('click', () => {
         const newForm = new Form(undefined, 'edit', recipe)
-        console.log(recipe)
         const modal = new Modal(document.getElementById('app') as HTMLElement, newForm as any)
         modal.render()
       })
