@@ -1,6 +1,15 @@
 import { Recipe, ICategory, FormType } from './types.ts'
+import { createSelect } from './utils.ts'
 import Form from './Form.ts'
 import Modal from './Modal.ts'
+import { category } from './API.ts'
+
+
+let optionsForSelectCategory = {
+  type: 'create',
+  defaultValue: 'Select category',
+  class: 'select-recipe-by-category'
+}
 
 export default class BookRecipeps{
   _idRecipe: number
@@ -9,6 +18,13 @@ export default class BookRecipeps{
   }
 
   render(parent: HTMLDivElement): void {
+    let selectByCategory = createSelect(Object.keys(category), optionsForSelectCategory)
+    selectByCategory.addEventListener('change', (event) => {
+      this.recipes = this.searchByCategory((event.target as HTMLSelectElement).value, category)
+      console.log(this.recipes)
+
+    })
+    parent.append(selectByCategory)
     this.recipes.forEach(recipe => {
       const recipeDiv = document.createElement('div')
       const deleteButton = document.createElement('button')
@@ -62,22 +78,6 @@ export default class BookRecipeps{
   }
   }
 
-
-  editRecipe(idRecipe: number, paramsKey: keyof Recipe, newValue: string):void{
-    const recipeToEdit: Recipe | undefined = this.recipes?.find(recipe=>recipe._id === idRecipe);
-    if(recipeToEdit){
-
-      if(typeof newValue === 'string') {
-        // recipeToEdit[paramsKey as keyof typeof recipeToEdit] = newValue 
-       console.log(recipeToEdit[paramsKey])
-       recipeToEdit[paramsKey] = newValue
-      }
-      // if(Array.isArray(newValue)) {
-      //   (recipeToEdit as any)[paramsKey] = [...recipeToEdit[paramsKey], newValue]
-      // }
-    }
-  }
-
   searchByTitle(title: string): Recipe[] {
     return this.recipes.filter(recipe => recipe.title.toLowerCase().includes(title.toLowerCase()))
   }
@@ -90,7 +90,7 @@ export default class BookRecipeps{
       return this.recipes.filter(recipe => recipe.time.toLowerCase() === time.toLowerCase())
   }
 
-  searchByCategory(category: string): Recipe[] {
-  return this.recipes.filter(recipe => recipe.category.toLowerCase() === category.toLowerCase())
+  searchByCategory(requestedCategory: string, category: {}): Recipe[] {
+   return  category[requestedCategory]
   }
 }

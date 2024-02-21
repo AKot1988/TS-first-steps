@@ -148,7 +148,9 @@ type FormParams = {
 }
 
 class FormElement {
-  data: any;
+  data: {
+    [key: string]: string | number
+  };
   form: HTMLFormElement;
   submitButton: HTMLButtonElement;
   header: HTMLHeadingElement;
@@ -163,7 +165,7 @@ class FormElement {
       surname: '',
       email: ''
     }
-    this.header = document.createElement('h1');
+    this.header = document.createElement('h1'); //винести за форму (перед)
     this.formHeader = formHeader;
     this.form = document.createElement('form');
     this.submitButton = document.createElement('button');
@@ -175,11 +177,11 @@ class FormElement {
     for(let key in this.formParams) {
       (this.form as any)[key] = this.formParams[key as keyof typeof this.formParams];
     }
-    this.inputs.forEach(inputParams => { new InputElement(inputParams).render(this.form)})
+    this.inputs.forEach(inputParams => {new InputElement(inputParams).render(this.form)})
     this.submitButton.addEventListener('click', (e) => {
       e.preventDefault()
       this.handleSubmit(e)
-    this.fetcher()})
+    })
       if(this.formHeader) {
         this.header.innerHTML = this.formHeader
         this.form.insertAdjacentElement('afterbegin', this.header)
@@ -189,7 +191,6 @@ class FormElement {
   }
 
     handleSubmit(e: Event){
-      e.preventDefault,
       console.log('form submitted')
       const formData = new FormData(this.form)
       // const data = Object.fromEntries(formData)   //отак порадив копайлот {input__email: 'Gogi', input__surname: 'Gogettini', input__name: 'Gogettini@g.net'}
@@ -200,6 +201,7 @@ class FormElement {
         surname: formData.get('input__surname'),
         email: formData.get('input__email')
       }
+      this.fetcher()
       console.log(this.data) // тут є перевагою, що ключі я кридумую сам {name: "gogi", surname: "gogi", email: "gogi"}
     }
 

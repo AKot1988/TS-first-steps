@@ -15,6 +15,8 @@ newRecipeButton.addEventListener('click', () => {
 
 const newBookRecipes = new BookRecipeps(recipeArray, {}, document.getElementById('app') as HTMLDivElement)
 newBookRecipes.render(document.querySelector('.bookRecipesContainer') as HTMLDivElement)
+
+
 /* TASk
  * Стоврити книгу рецептів
  * Тобто є готова форма для введення рецепту, де є поля:

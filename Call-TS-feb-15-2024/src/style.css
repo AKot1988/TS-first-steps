@@ -183,7 +183,8 @@ button {
 .recipe-item-instructions,
 .recipe-item-category,
 .recipe-item-time,
-.recipe-item-dificult {
+.recipe-item-dificult,
+.select-recipe-by-category {
   height: 30px;
   font-size: 16px;
   font-weight: 500;
